@@ -42,5 +42,18 @@ namespace ProjectPlanner.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Project project)
+        {
+            if(project != null)
+            {
+                _db.Projects.Add(project);
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
