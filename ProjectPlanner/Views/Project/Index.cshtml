@@ -1,3 +1,24 @@
 ﻿@model IEnumerable<Project>
 
 <h1>Project</h1>
+
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Name</a></td>
+                <td>@item.Description</td>
+                <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+            </tr>
+        }
+    }
+</table>
+
+<a asp-action="Create">Create new project</a>
