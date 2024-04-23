@@ -54,7 +54,7 @@ namespace ProjectPlanner.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult Remove(int id)
+        public IActionResult Delete(int id)
         {
             Project projectFromDb = _db.Projects.FirstOrDefault(u => u.Id == id);
 
@@ -62,7 +62,7 @@ namespace ProjectPlanner.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(Project project)
+        public IActionResult Delete(Project project)
         {
 
             if(project != null)
