@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectPlanner.Data;
 using ProjectPlanner.Models;
+using ProjectPlanner.Models.ViewModels;
 
 namespace ProjectPlanner.Controllers
 {
