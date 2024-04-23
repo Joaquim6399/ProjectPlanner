@@ -1,3 +1,16 @@
 ﻿@model Project
 <h1> Edit project @Model.Name</h1>
+
+
+<form asp-action="Edit" method="post">
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" />
+    <br />
+    <label asp-for="@Model.Description"></label>
+    <input asp-for="@Model.Description" />
+    <br />
+
+    <input type="submit" />
+</form>
+
 <a asp-action="Index">Back to Projects</a>
