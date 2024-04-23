@@ -1,3 +1,14 @@
 ﻿@model Project
 
 <h1>Create new Project</h1>
+
+<form asp-action="Create" method="post">
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" />
+    <br />
+    <label asp-for="@Model.Description"></label>
+    <input asp-for="@Model.Description" />
+    <br />
+
+    <input type="submit" />
+</form>
