@@ -1,0 +1,26 @@
+﻿@using ProjectPlanner.Models.ViewModels
+@model ProjectBoardVM
+
+<h1>Project Board : @Model.Project.Name</h1>
+
+<a asp-controller="Project" asp-action="Index">Back to projects</a>
+<br />
+<table>
+    <tr>
+        <th>Ticket</th>
+        <th>Status</th>
+        <th>Priority</th>
+    </tr>
+    @{
+        foreach(var item in Model.ListOfTickets)
+        {
+            
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Status</td>
+                <td>@item.Priority</td>
+            </tr>
+        }
+    }
+</table>
+<a asp-controller="Ticket" asp-action="Create" asp-route-projectId="@Model.Project.Id">Create new ticket</a>
