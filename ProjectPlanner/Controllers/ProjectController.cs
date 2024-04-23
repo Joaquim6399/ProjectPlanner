@@ -17,5 +17,10 @@ namespace ProjectPlanner.Controllers
 
             return View(projects);
         }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }
