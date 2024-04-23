@@ -37,5 +37,10 @@ namespace ProjectPlanner.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
