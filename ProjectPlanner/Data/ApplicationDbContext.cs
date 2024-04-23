@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectPlanner.Models;
 
 namespace ProjectPlanner.Data
 {
@@ -8,5 +9,8 @@ namespace ProjectPlanner.Data
         {
             
         }
+
+        public DbSet<Project> Projects { get; set; }
+
     }
 }
