@@ -25,5 +25,17 @@ namespace ProjectPlanner.Controllers
 
             return View(projectFromDb);
         }
+
+        [HttpPost]
+        public IActionResult Edit(Project project)
+        {
+
+            if(project != null)
+            {
+                _db.Projects.Update(project);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
