@@ -76,7 +76,12 @@ namespace ProjectPlanner.Controllers
         
         public IActionResult Details(int id)
         {
-            return View();
+            ProjectBoardVM projectBoard = new ProjectBoardVM();
+
+            projectBoard.Project = _db.Projects.FirstOrDefault(u => u.Id == id);
+            projectBoard.ListOfTickets = _db.Tickets.ToList().Where(u => u.ProjectId == projectBoard.Project.Id);
+
+            return View(projectBoard);
         }
     }
 }
