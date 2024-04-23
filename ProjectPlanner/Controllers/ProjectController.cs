@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectPlanner.Data;
+using ProjectPlanner.Models;
 
 namespace ProjectPlanner.Controllers
 {
@@ -18,9 +19,11 @@ namespace ProjectPlanner.Controllers
             return View(projects);
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View();
+            Project projectFromDb = _db.Projects.FirstOrDefault(u => u.Id == id);
+
+            return View(projectFromDb);
         }
     }
 }
