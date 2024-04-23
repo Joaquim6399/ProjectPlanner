@@ -13,7 +13,9 @@ namespace ProjectPlanner.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var projects = _db.Projects.ToList();
+
+            return View(projects);
         }
     }
 }
