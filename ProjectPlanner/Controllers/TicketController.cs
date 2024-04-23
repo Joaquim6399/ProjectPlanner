@@ -61,5 +61,39 @@ namespace ProjectPlanner.Controllers
             }
             return RedirectToAction("Details", "Project", new { id = ticketBoard.Project.Id });
         }
+
+        public IActionResult Edit(int ticketId)
+        {
+
+            TicketBoardVM ticketBoard = new TicketBoardVM();
+            ticketBoard.Ticket = _db.Tickets.FirstOrDefault(u => u.Id == ticketId);
+            ticketBoard.Project = _db.Projects.FirstOrDefault(u => u.Id == ticketBoard.Ticket.ProjectId);
+
+            List<string> priorityList = new List<string>();
+            priorityList.Add(SD.priority_low);
+            priorityList.Add(SD.priority_medium);
+            priorityList.Add(SD.priority_high);
+
+
+            ticketBoard.PriorityList = priorityList.ToList().Select(u => new SelectListItem
+            {
+                Text = u,
+                Value = u
+            });
+
+            List<string> statusList = new List<string>();
+            statusList.Add(SD.status_new);
+            statusList.Add(SD.status_progress);
+            statusList.Add(SD.status_waiting);
+            statusList.Add(SD.status_done);
+
+            ticketBoard.StatusList = statusList.ToList().Select(u => new SelectListItem
+            {
+                Text = u,
+                Value = u
+            });
+
+            return View(ticketBoard);
+        }
     }
 }
