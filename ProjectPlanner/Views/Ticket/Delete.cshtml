@@ -1,0 +1,35 @@
+﻿@using ProjectPlanner.Models.ViewModels
+@model TicketBoardVM
+
+<h1>Delete ticket @Model.Ticket.Title from @Model.Project.Name</h1>
+
+
+<form asp-action="Delete" method="post">
+    <input asp-for="@Model.Ticket.ProjectId" hidden />
+    <input asp-for="@Model.Ticket.Project" hidden />
+    <input asp-for="@Model.Project.Id" hidden />
+    <input asp-for="@Model.Ticket.Id" hidden />
+
+    <input asp-for="@Model.Ticket.Description" hidden />
+    <input asp-for="@Model.Ticket.Title" hidden />
+    <input asp-for="@Model.Ticket.Status" hidden />
+    <input asp-for="@Model.Ticket.Priority" hidden />
+
+    <label asp-for="@Model.Ticket.Title"></label>
+    <input asp-for="@Model.Ticket.Title" disabled />
+    <br />
+    <label asp-for="@Model.Ticket.Description"></label>
+    <input asp-for="@Model.Ticket.Description" disabled/>
+    <br />
+    <label asp-for="@Model.Ticket.Priority"></label><br>
+    <select class="form-label" asp-for="@Model.Ticket.Priority" asp-items="@Model.PriorityList" disabled>
+        <option disabled selected>--Select Priority--</option>
+    </select>
+    <br />
+    <label asp-for="@Model.Ticket.Status"></label><br>
+    <select class="form-label" asp-for="@Model.Ticket.Status" asp-items="@Model.StatusList" disabled>
+        <option disabled selected>--Select Priority--</option>
+    </select>
+    <br />
+    <input type="submit" />
+</form>

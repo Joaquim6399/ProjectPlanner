@@ -69,6 +69,26 @@ namespace ProjectPlanner.Controllers
 
             return RedirectToAction("Details", "Project", new { id = ticket.ProjectId });
         }
+        public IActionResult Delete(int ticketId)
+        {
+
+            TicketBoardVM ticketBoard = new TicketBoardVM();
+            ticketBoard.Ticket = _db.Tickets.FirstOrDefault(u => u.Id == ticketId);
+            ticketBoard.Project = _db.Projects.FirstOrDefault(u => u.Id == ticketBoard.Ticket.ProjectId);
+    
+            return View(ticketBoard);
+
+        }
+
+        [HttpPost]
+        public IActionResult Delete(TicketBoardVM ticketBoard)
+        {
+
+            _db.Tickets.Remove(ticketBoard.Ticket);
+            _db.SaveChanges();
+
+            return RedirectToAction("Details", "Project", new { id = ticketBoard.Ticket.ProjectId });
+        }
        
     }
 }

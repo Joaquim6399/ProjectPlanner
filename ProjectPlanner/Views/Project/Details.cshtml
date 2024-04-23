@@ -20,7 +20,7 @@
                 <td>@item.Status</td>
                 <td>@item.Priority</td>
                 <td><a asp-controller="Ticket" asp-action="Edit" asp-route-ticketId="@item.Id">Edit</a></td>
-                <td><a>Delete</a></td>
+                <td><a asp-controller="Ticket" asp-action="Delete" asp-route-ticketId="@item.Id">Delete</a></td>
             </tr>
         }
     }
