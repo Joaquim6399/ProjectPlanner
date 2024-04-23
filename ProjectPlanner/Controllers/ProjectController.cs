@@ -54,6 +54,24 @@ namespace ProjectPlanner.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult Remove(int id)
+        {
+            Project projectFromDb = _db.Projects.FirstOrDefault(u => u.Id == id);
+
+            return View(projectFromDb);
+        }
+
+        [HttpPost]
+        public IActionResult Remove(Project project)
+        {
+
+            if(project != null)
+            {
+                _db.Projects.Remove(project);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }
