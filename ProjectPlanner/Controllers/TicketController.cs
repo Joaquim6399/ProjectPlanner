@@ -58,6 +58,17 @@ namespace ProjectPlanner.Controllers
             ticketBoard.Project = _db.Projects.FirstOrDefault(u => u.Id == ticketBoard.Ticket.ProjectId);
 
             return View(ticketBoard);
+
         }
+
+        [HttpPost]
+        public IActionResult Edit(Ticket ticket)
+        {
+            _db.Tickets.Update(ticket);
+            _db.SaveChanges();
+
+            return RedirectToAction("Details", "Project", new { id = ticket.ProjectId });
+        }
+       
     }
 }

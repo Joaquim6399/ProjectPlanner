@@ -4,10 +4,11 @@
 <h1>Edit ticket @Model.Ticket.Title</h1>
 
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
     <input asp-for="@Model.Ticket.ProjectId" hidden />
     <input asp-for="@Model.Ticket.Project" hidden />
     <input asp-for="@Model.Project.Id" hidden />
+    <input asp-for="@Model.Ticket.Id" hidden />
 
     <label asp-for="@Model.Ticket.Title"></label>
     <input asp-for="@Model.Ticket.Title" />
