@@ -1,0 +1,29 @@
+﻿@using ProjectPlanner.Models.ViewModels
+@model TicketBoardVM
+
+<h1>Edit ticket @Model.Ticket.Title</h1>
+
+
+<form asp-action="Create" method="post">
+    <input asp-for="@Model.Ticket.ProjectId" hidden />
+    <input asp-for="@Model.Ticket.Project" hidden />
+    <input asp-for="@Model.Project.Id" hidden />
+
+    <label asp-for="@Model.Ticket.Title"></label>
+    <input asp-for="@Model.Ticket.Title" />
+    <br />
+    <label asp-for="@Model.Ticket.Description"></label>
+    <input asp-for="@Model.Ticket.Description" />
+    <br />
+    <label asp-for="@Model.Ticket.Priority"></label><br>
+    <select class="form-label" asp-for="@Model.Ticket.Priority" asp-items="@Model.PriorityList">
+        <option disabled selected>--Select Priority--</option>
+    </select>
+    <br />
+    <label asp-for="@Model.Ticket.Status"></label><br>
+    <select class="form-label" asp-for="@Model.Ticket.Status" asp-items="@Model.StatusList">
+        <option disabled selected>--Select Priority--</option>
+    </select>
+    <br />
+    <input type="submit" />
+</form>
