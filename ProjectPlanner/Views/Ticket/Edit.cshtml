@@ -7,14 +7,16 @@
 <form asp-action="Edit" method="post">
     <input asp-for="@Model.Ticket.ProjectId" hidden />
     <input asp-for="@Model.Ticket.Project" hidden />
-    <input asp-for="@Model.Project.Id" hidden />
-    <input asp-for="@Model.Ticket.Id" hidden />
+    <input asp-for="Project.Id" hidden />
+    <input asp-for="Ticket.Id" hidden />
 
-    <label asp-for="@Model.Ticket.Title"></label>
-    <input asp-for="@Model.Ticket.Title" />
+    <label asp-for="Ticket.Title"></label>
+    <input asp-for="Ticket.Title" />
+    <span asp-validation-for="Ticket.Title" class="text-danger"></span>
     <br />
-    <label asp-for="@Model.Ticket.Description"></label>
-    <input asp-for="@Model.Ticket.Description" />
+    <label asp-for="Ticket.Description"></label>
+    <input asp-for="Ticket.Description" />
+    <span asp-validation-for="Ticket.Description" class="text-danger"></span>
     <br />
     <label asp-for="@Model.Ticket.Priority"></label><br>
     <select class="form-label" asp-for="@Model.Ticket.Priority" asp-items="@Model.PriorityList">

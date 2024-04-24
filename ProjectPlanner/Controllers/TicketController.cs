@@ -72,12 +72,19 @@ namespace ProjectPlanner.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Ticket ticket)
+        public IActionResult Edit(TicketBoardVM ticketBoard)
         {
-            _db.Tickets.Update(ticket);
-            _db.SaveChanges();
+           
+          
+            if (ModelState.IsValid)
+            {
+                _db.Tickets.Update(ticketBoard.Ticket);
+                _db.SaveChanges();
 
-            return RedirectToAction("Details", "Project", new { id = ticket.ProjectId });
+                return RedirectToAction("Details", "Project", new { id = ticketBoard.Ticket.ProjectId });
+            }
+
+            return View(ticketBoard);
         }
         public IActionResult Delete(int ticketId)
         {
