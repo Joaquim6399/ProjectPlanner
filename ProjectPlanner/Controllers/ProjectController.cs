@@ -30,13 +30,15 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Edit(Project project)
         {
-
-            if(project != null)
+           if(ModelState.IsValid)
             {
+
                 _db.Projects.Update(project);
                 _db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+
+            return View(project);
         }
 
         public IActionResult Create()
