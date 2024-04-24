@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectPlanner.Models
@@ -12,11 +13,15 @@ namespace ProjectPlanner.Models
         [Required]
         [StringLength(60,MinimumLength =5)]
         public string Description { get; set; }
+        [ValidateNever]
         public string Status { get; set; }
+        [ValidateNever]
         public string Priority { get; set; }
         public DateTime CreatedOn { get; set; }
+        [ValidateNever]
         public int ProjectId { get; set; }
         [ForeignKey("ProjectId")]
+        [ValidateNever]
         public Project Project { get; set; }
 
     }

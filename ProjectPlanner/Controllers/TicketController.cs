@@ -30,6 +30,12 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Create(TicketBoardVM ticketBoard)
         {
+            //Some properties have been validatenever if this creates issues in the future I will instead just use input hidden more carefully
+
+            ticketBoard.Ticket.Status = SD.status_new;
+            ticketBoard.Ticket.CreatedOn = DateTime.Now;
+            ticketBoard.Ticket.ProjectId = ticketBoard.Project.Id;
+
             if(ModelState.IsValid)
             {
 

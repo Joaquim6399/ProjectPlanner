@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectPlanner.Utilities;
 
 namespace ProjectPlanner.Models.ViewModels
@@ -6,6 +7,7 @@ namespace ProjectPlanner.Models.ViewModels
     public class TicketBoardVM
     {
         public Ticket Ticket { get; set; }
+        [ValidateNever]
         public Project Project { get; set; }
         public IEnumerable<SelectListItem> StatusList { get; set; }
         public IEnumerable<SelectListItem> PriorityList { get; set; }

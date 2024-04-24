@@ -5,9 +5,9 @@
 
 
 <form asp-action="Create" method="post">
-    <input asp-for="@Model.Ticket.ProjectId" hidden />
-    <input asp-for="@Model.Ticket.Project" hidden />
-    <input asp-for="@Model.Project.Id" hidden />
+    @*  <input asp-for="Ticket.ProjectId" hidden />
+     <input asp-for="Ticket.Project" hidden /> *@
+    <input asp-for="Project.Id" hidden />
 
     <label asp-for="Ticket.Title"></label>
     <input asp-for="Ticket.Title" />
@@ -25,5 +25,4 @@
     <input type="submit" />
 </form>
 
-@* <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.Ticket.ProjectId">Back to tickets</a>
- *@
+<a asp-controller="Project" asp-action="Details" asp-route-id="@Model.Project.Id">Back to tickets</a>
