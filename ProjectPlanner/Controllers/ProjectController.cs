@@ -47,13 +47,15 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Create(Project project)
         {
-            if(project != null)
+            if(ModelState.IsValid)
             {
                 _db.Projects.Add(project);
                 _db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View(project);
         }
         public IActionResult Delete(int id)
         {
