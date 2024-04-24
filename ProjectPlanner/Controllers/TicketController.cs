@@ -30,15 +30,15 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Create(TicketBoardVM ticketBoard)
         {
-            Ticket newTicket = ticketBoard.Ticket;
-            newTicket.Status = SD.status_new;
-            newTicket.CreatedOn = DateTime.Now;
-            newTicket.ProjectId = ticketBoard.Project.Id;
-
-           
-            
-            if (newTicket != null)
+            if(ModelState.IsValid)
             {
+
+                Ticket newTicket = ticketBoard.Ticket;
+                newTicket.Status = SD.status_new;
+                newTicket.CreatedOn = DateTime.Now;
+                newTicket.ProjectId = ticketBoard.Project.Id;
+
+               
                 if (newTicket.Priority == null)
                 {
                     newTicket.Priority = SD.priority_medium;
@@ -46,8 +46,12 @@ namespace ProjectPlanner.Controllers
 
                 _db.Tickets.Add(newTicket);
                 _db.SaveChanges();
+
+                return RedirectToAction("Details", "Project", new { id = ticketBoard.Project.Id });
             }
-            return RedirectToAction("Details", "Project", new { id = ticketBoard.Project.Id });
+
+            return View(ticketBoard);
+
         }
 
         public IActionResult Edit(int ticketId)
