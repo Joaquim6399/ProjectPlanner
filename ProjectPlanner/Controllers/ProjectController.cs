@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectPlanner.Data;
 using ProjectPlanner.Models;
 using ProjectPlanner.Models.ViewModels;
 
 namespace ProjectPlanner.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private readonly ApplicationDbContext _db;

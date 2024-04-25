@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectPlanner.Data;
 using ProjectPlanner.Models;
@@ -7,6 +8,7 @@ using ProjectPlanner.Utilities;
 
 namespace ProjectPlanner.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         private readonly ApplicationDbContext _db;
