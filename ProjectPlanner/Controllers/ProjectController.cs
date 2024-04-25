@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectPlanner.Data;
 using ProjectPlanner.Models;
 using ProjectPlanner.Models.ViewModels;
+using System.Security.Claims;
 
 namespace ProjectPlanner.Controllers
 {
@@ -17,6 +18,9 @@ namespace ProjectPlanner.Controllers
         }
         public IActionResult Index()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             var projects = _db.Projects.ToList();
 
             return View(projects);
