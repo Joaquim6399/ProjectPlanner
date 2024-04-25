@@ -21,7 +21,8 @@ namespace ProjectPlanner.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var projects = _db.Projects.ToList();
+            var projects = _db.Projects.ToList().Where(u=>u.UserId == userId);
+            
 
             return View(projects);
         }
@@ -36,7 +37,13 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Edit(Project project)
         {
-           if(ModelState.IsValid)
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            project.UserId = userId;
+
+            if (ModelState.IsValid)
             {
 
                 _db.Projects.Update(project);
@@ -55,7 +62,12 @@ namespace ProjectPlanner.Controllers
         [HttpPost]
         public IActionResult Create(Project project)
         {
-            if(ModelState.IsValid)
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            project.UserId = userId;
+
+            if (ModelState.IsValid)
             {
                 _db.Projects.Add(project);
                 _db.SaveChanges();
