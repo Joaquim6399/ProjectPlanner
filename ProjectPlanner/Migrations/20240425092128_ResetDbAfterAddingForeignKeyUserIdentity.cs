@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectPlanner.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityScaffolding : Migration
+    public partial class ResetDbAfterAddingForeignKeyUserIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -156,33 +156,50 @@ namespace ProjectPlanner.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4063));
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4125));
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4129));
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4180));
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -222,6 +239,16 @@ namespace ProjectPlanner.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_UserId",
+                table: "Projects",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ProjectId",
+                table: "Tickets",
+                column: "ProjectId");
         }
 
         /// <inheritdoc />
@@ -243,38 +270,16 @@ namespace ProjectPlanner.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Tickets");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 9, 57, 36, 391, DateTimeKind.Local).AddTicks(5450));
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 9, 57, 36, 391, DateTimeKind.Local).AddTicks(5517));
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 3,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 9, 57, 36, 391, DateTimeKind.Local).AddTicks(5521));
-
-            migrationBuilder.UpdateData(
-                table: "Tickets",
-                keyColumn: "Id",
-                keyValue: 4,
-                column: "CreatedOn",
-                value: new DateTime(2024, 4, 24, 9, 57, 36, 391, DateTimeKind.Local).AddTicks(5524));
         }
     }
 }

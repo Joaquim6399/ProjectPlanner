@@ -240,23 +240,15 @@ namespace ProjectPlanner.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Create biggest bomb ever",
-                            Name = "Mahatan Project"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Put man on the moon",
-                            Name = "Apollo Project"
-                        });
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("ProjectPlanner.Models.Ticket", b =>
@@ -296,48 +288,6 @@ namespace ProjectPlanner.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Tickets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedOn = new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4063),
-                            Description = "Succesfully split a atom",
-                            Priority = "Medium",
-                            ProjectId = 1,
-                            Status = "New",
-                            Title = "Split Atom"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4125),
-                            Description = "Find plutunium for the bomb",
-                            Priority = "High",
-                            ProjectId = 1,
-                            Status = "New",
-                            Title = "Find Plutonium"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedOn = new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4129),
-                            Description = "Find someone willingly to go to the moon",
-                            Priority = "Low",
-                            ProjectId = 2,
-                            Status = "New",
-                            Title = "Find Astronaut"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedOn = new DateTime(2024, 4, 24, 19, 56, 12, 890, DateTimeKind.Local).AddTicks(4180),
-                            Description = "Create engine with w16 orientation",
-                            Priority = "Medium",
-                            ProjectId = 4,
-                            Status = "New",
-                            Title = "Create w16 engine"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -389,6 +339,17 @@ namespace ProjectPlanner.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjectPlanner.Models.Project", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectPlanner.Models.Ticket", b =>
