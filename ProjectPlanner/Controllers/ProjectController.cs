@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectPlanner.Data;
 using ProjectPlanner.Models;
 using ProjectPlanner.Models.ViewModels;
+using ProjectPlanner.Utilities;
 using System.Security.Claims;
 
 namespace ProjectPlanner.Controllers
@@ -101,7 +102,8 @@ namespace ProjectPlanner.Controllers
             ProjectBoardVM projectBoard = new ProjectBoardVM();
 
             projectBoard.Project = _db.Projects.FirstOrDefault(u => u.Id == id);
-            projectBoard.ListOfTickets = _db.Tickets.ToList().Where(u => u.ProjectId == projectBoard.Project.Id);
+            projectBoard.ListOfTickets = _db.Tickets.ToList().Where(u => u.ProjectId == projectBoard.Project.Id).OrderBy(u => u.Status, new MyComparer());
+
 
             return View(projectBoard);
         }
