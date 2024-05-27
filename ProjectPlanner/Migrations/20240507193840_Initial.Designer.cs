@@ -12,8 +12,8 @@ using ProjectPlanner.Data;
 namespace ProjectPlanner.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240425092128_ResetDbAfterAddingForeignKeyUserIdentity")]
-    partial class ResetDbAfterAddingForeignKeyUserIdentity
+    [Migration("20240507193840_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
