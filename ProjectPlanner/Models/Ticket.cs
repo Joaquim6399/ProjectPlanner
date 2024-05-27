@@ -11,8 +11,6 @@ namespace ProjectPlanner.Models
         [Required]
         [StringLength(60,MinimumLength =3)]
         public string Title { get; set; }
-        [Required]
-        [StringLength(60,MinimumLength =5)]
         public string Description { get; set; }
         [ValidateNever]
         public string Status { get; set; }
